@@ -1,7 +1,3 @@
-//  table 'user' (aka admin)
-
-const sequelize = require("sequelize");
-
 function userModel(sequelize, DataTypes) {
   return sequelize.define(
     "user",
