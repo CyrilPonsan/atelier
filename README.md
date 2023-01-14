@@ -28,3 +28,11 @@ pour charger les fixtures, se positionner dans le répertoire "server" puis :
 pour lancer l'application, à partir du répertoire racine du projet, tapez :
 
 > npm run watch
+
+pour build l'appli :
+
+> npm run deploy
+
+on accède au front end à partir de l'adresse suivante :
+
+http://localhost:3000/
