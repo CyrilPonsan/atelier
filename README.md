@@ -36,3 +36,15 @@ pour build l'appli :
 on accède au front end à partir de l'adresse suivante :
 
 http://localhost:3000/
+
+pour créer des utilisateurs (user) se positionner dans le rép "server" :
+
+tech :
+
+> node src/utils/scripts/createUser.js 'email@exemple.fr' 'password'
+
+admin :
+
+> node src/utils/scripts/createUser.js 'email@exemple.fr' 'password' 'admin'
+
+les noms d'utilisateurs (emails) doivent être uniques
