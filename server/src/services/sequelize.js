@@ -1,6 +1,11 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const UserModel = require("../models/sequelize.models.js/user.db.model");
 const ClientModel = require("../models/sequelize.models.js/client.db.model");
+const TicketModel = require("../models/sequelize.models.js/ticket.db.model");
+const MaterielModel = require("../models/sequelize.models.js/materiel.db.model");
+const StatutModel = require("../models/sequelize.models.js/statut.model");
+
+//  paramètres de connexion à la bdd
 
 let sequelize;
 
@@ -21,7 +26,7 @@ if (process.env.NODE8ENV === "development") {
     }
   );
 } else {
-  console.log("dev environment");
+  console.log("prod environment");
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USERNAME,
@@ -38,16 +43,73 @@ if (process.env.NODE8ENV === "development") {
   );
 }
 
+//  entités de la bdd
+
 const User = UserModel(sequelize, DataTypes);
 const Client = ClientModel(sequelize, DataTypes);
+const Ticket = TicketModel(sequelize, DataTypes);
+const Materiel = MaterielModel(sequelize, DataTypes);
+const Statut = StatutModel(sequelize, DataTypes);
+
+//  relations
+
+/**
+ * relation ManyToOne entre client et ticket
+ * un client peut avoir plusieurs tickets
+ * un ticket n'est rattaché qu'à un seul client
+ */
+Client.hasMany(Ticket, { as: "ticket", foreignKey: "client_id" });
+Ticket.belongsTo(Client, { foreignKey: "client_id", as: "client" });
+
+/**
+ * relation ManyToOne entre user et ticket
+ * un user peut avoir plusieurs tickets
+ * un ticket n'est rattaché qu'à un seul user
+ */
+User.hasMany(Ticket, { as: "ticket", foreignKey: "user_id" });
+Ticket.belongsTo(User, { foreignKey: "user_id", as: "technicien" });
+
+/**
+ * relation ManyToOne entre materiel et ticket
+ * un materiel peut avoir plusieurs tickets
+ * un ticket n'est rattaché qu'à un seul materiel
+ */
+Materiel.hasMany(Ticket, { as: "ticket", foreignKey: "materiel_id" });
+Ticket.belongsTo(Materiel, { foreignKey: "materiel_id", as: "materiel" });
+
+/**
+ * relation ManyToOne entre client et materiel
+ * un client peut avoir plusieurs materiel
+ * un materiel n'est rattaché qu'à un seul client
+ */
+Client.hasMany(Materiel, { as: "materiel", foreignKey: "client_id" });
+Materiel.belongsTo(Client, { foreignKey: "client_id", as: "client" });
+
+/**
+ * relation OneToOne entre statut et ticket
+ */
+Ticket.belongsTo(Statut, { foreignKey: "statut_id", as: "statut" });
+
+//  connexion à la bdd
 
 function initDB() {
   return sequelize
-    .sync()
+    .sync({ alter: true })
     .then(() => console.log("Base de donnée initialisée."))
     .catch((error) =>
-      console.log(`La base de donnée n'a pas été inistialisée: ${error}`)
+      console.log(`La base de donnée n'a pas été initialisée: ${error}`)
     );
 }
 
-module.exports = { initDB, User, Client };
+//  reset bdd, utiliser le script "resetDB.js" pour remplir la table "statut"
+
+function resetDB() {
+  return sequelize
+    .sync({ force: true })
+    .then(() => console.log("Base de donnée réinitialisée."))
+    .catch((error) =>
+      console.log(`La base de donnée n'a pas été réinitialisée: ${error}`)
+    );
+}
+
+module.exports = { initDB, resetDB, User, Client, Materiel, Ticket, Statut };

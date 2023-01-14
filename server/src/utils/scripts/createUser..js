@@ -1,14 +1,14 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 
-const { initDB, User } = require("../../services/sequelize");
+const { User } = require("../../services/sequelize");
 
 initDB();
 
 // créér un utilisateur avec le role 'tech' :
-// node src/utils/scripts/createUser..js 'email@exemple.fr' 'password'
+// node src/utils/scripts/createUser.js 'email@exemple.fr' 'password'
 // pour créer un admin :
-// node src/utils/scripts/createUser..js 'email@exemple.fr' 'password' 'admin'
+// node src/utils/scripts/createUser.js 'email@exemple.fr' 'password' 'admin'
 async function createUser() {
   const roles = ["tech"];
   if (process.argv[4] === "admin") {
