@@ -90,7 +90,7 @@ Materiel.belongsTo(Client, { foreignKey: "client_id", as: "client" });
  */
 Ticket.belongsTo(Statut, { foreignKey: "statut_id", as: "statut" });
 
-//  connexion à la bdd
+//  initialisation à la bdd
 
 function initDB() {
   return sequelize
