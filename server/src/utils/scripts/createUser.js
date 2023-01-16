@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 
 const { User } = require("../../services/sequelize");
 
-initDB();
-
 // créér un utilisateur avec le role 'tech' :
 // node src/utils/scripts/createUser.js 'email@exemple.fr' 'password'
 // pour créer un admin :

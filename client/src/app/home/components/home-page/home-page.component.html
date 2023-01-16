@@ -1,0 +1,4 @@
+<p>home-page works!</p>
+
+<h2 *ngIf="authService.user">Bienvenue {{authService.user.prenom}}</h2>
+<p>technicien depuis le {{authService.user.createdAt}}</p>
