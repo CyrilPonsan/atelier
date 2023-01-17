@@ -95,9 +95,9 @@ Ticket.belongsTo(Statut, { foreignKey: "statut_id", as: "statut" });
 function initDB() {
   return sequelize
     .sync({ alter: true })
-    .then(() => console.log("Base de donnée initialisée."))
+    .then(() => console.log("Base de données initialisée."))
     .catch((error) =>
-      console.log(`La base de donnée n'a pas été initialisée: ${error}`)
+      console.log(`La base de données n'a pas été initialisée: ${error}`)
     );
 }
 
@@ -106,9 +106,9 @@ function initDB() {
 function resetDB() {
   return sequelize
     .sync({ force: true })
-    .then(() => console.log("Base de donnée réinitialisée."))
+    .then(() => console.log("Base de donnéesréinitialisée."))
     .catch((error) =>
-      console.log(`La base de donnée n'a pas été réinitialisée: ${error}`)
+      console.log(`La base de donnéess n'a pas été réinitialisée: ${error}`)
     );
 }
 
