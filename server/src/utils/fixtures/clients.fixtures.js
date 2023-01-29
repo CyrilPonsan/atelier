@@ -31,4 +31,4 @@ async function createClientsFixtures() {
 
 //createClientsFixtures();
 
-module.exports = createClientsFixtures;
+module.exports = { createClientsFixtures };

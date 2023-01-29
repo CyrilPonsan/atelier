@@ -5,20 +5,22 @@ const {
   regexMail,
   regexPassword,
   credentialsError,
-  regexGeneric,
   serverIssue,
+  noAccess,
 } = require("../../utils/data");
 
 const accessTimeLife = "2h";
 const refreshTimeLife = "10h";
 
+//  authentification de l'utilisateur
 async function httpLogin(req, res) {
+  console.log(req.body);
   const { username, password } = req.body;
   if (
     !username ||
     !regexMail.test(username) ||
     !password ||
-    !regexGeneric.test(password)
+    !regexPassword.test(password)
   ) {
     return res.status(400).json({ response: credentialsError });
   }
@@ -28,17 +30,39 @@ async function httpLogin(req, res) {
       return res.status(400).json({ response: credentialsError });
     }
     return res.status(200).json({
-      username: user.username,
-      id: user.id,
-      nom: user.nom,
-      prenom: user.prenom,
-      roles: user.roles,
-      createdAt: user.createdAt,
+      user,
       accessTolen: _getToken(user, accessTimeLife),
       refreshToken: _getToken(user, refreshTimeLife),
     });
   } catch (error) {
     return res.status(500).json({ error: serverIssue });
+  }
+}
+
+//  retourne des tokens tout neufs
+function httpGenerateNewTokens(req, res) {
+  const refreshToken = req.body.refreshToken;
+  if (!refreshToken) {
+    return res.status(403).json({ noAccess });
+  }
+  try {
+    const decodedToken = jwt.verify(refreshToken, process.env.PRIVATE_KEY);
+    if (
+      !decodedToken.roles[0] === "tech" ||
+      !decodedToken.roles[0] === "admin"
+    ) {
+      return res.status(403).json({ message: noAccess });
+    }
+    const user = {
+      id: decodedToken.id,
+      roles: decodedToken.roles,
+    };
+    res.status(200).json({
+      accessToken: _getToken(user, accessTimeLife),
+      refreshToken: _getToken(user, refreshTimeLife),
+    });
+  } catch (err) {
+    res.status(403).json({ message: serverIssue + err });
   }
 }
 
@@ -54,4 +78,4 @@ const _getToken = (user, timeLife) => {
   );
 };
 
-module.exports = { httpLogin };
+module.exports = { httpLogin, httpGenerateNewTokens };
