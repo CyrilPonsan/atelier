@@ -1,0 +1,15 @@
+<main>
+  <section *ngIf="ticket">
+    <p>Référence ticket : {{ticket.ref}}</p>
+    <p>Ouvert le : {{ticket.intervention[0].date | date: 'dd MMMM yyyy'}}</p>
+    <p>Client : </p>
+    <p>{{ticket.materiel.client.raisonSociale}}</p>
+    <p>Materiel : {{ticket.materiel.type}}</p>
+    <p>Marque : {{ticket.materiel.marque}}</p>
+    <p>Modèle : {{ticket.materiel.modele}}</p>
+    <p (click)="urlHandler()">{{ticket.materiel.url}}</p>
+  </section>
+  <section>
+    <app-intervention *ngFor="let intervention of interventions" [intervention]="intervention"></app-intervention>
+  </section>
+</main>

@@ -9,10 +9,15 @@ export class AuthGuard implements CanActivate {
   constructor(public authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.authService.user) {
+    if (this.authService.getToken()) {
+      this.authService.isLoggedIn = true;
+      if (!this.authService.user) {
+        this.authService.setUser;
+      }
       return true;
     }
-    this.router.navigateByUrl('/connexion');
+    //this.toast.tokenExpired();
+    this.authService.logout();
     return false;
   }
 }

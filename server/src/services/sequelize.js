@@ -4,6 +4,7 @@ const ClientModel = require("../models/sequelize.models.js/client.db.model");
 const TicketModel = require("../models/sequelize.models.js/ticket.db.model");
 const MaterielModel = require("../models/sequelize.models.js/materiel.db.model");
 const StatutModel = require("../models/sequelize.models.js/statut.model");
+const InterventionModel = require("../models/sequelize.models.js/intervention.db.model");
 
 //  paramètres de connexion à la bdd
 
@@ -50,24 +51,18 @@ const Client = ClientModel(sequelize, DataTypes);
 const Ticket = TicketModel(sequelize, DataTypes);
 const Materiel = MaterielModel(sequelize, DataTypes);
 const Statut = StatutModel(sequelize, DataTypes);
+const Intervention = InterventionModel(sequelize, DataTypes);
 
 //  relations
 
 /**
- * relation ManyToOne entre client et ticket
- * un client peut avoir plusieurs tickets
- * un ticket n'est rattaché qu'à un seul client
+ * relation ManyToOne entre ticket et intervention
+ * un ticket peut avoir plusieurs interventions et
+ * une intervention ne peut être associée qu'à un
+ * seul ticket
  */
-Client.hasMany(Ticket, { as: "ticket", foreignKey: "client_id" });
-Ticket.belongsTo(Client, { foreignKey: "client_id", as: "client" });
-
-/**
- * relation ManyToOne entre user et ticket
- * un user peut avoir plusieurs tickets
- * un ticket n'est rattaché qu'à un seul user
- */
-User.hasMany(Ticket, { as: "ticket", foreignKey: "user_id" });
-Ticket.belongsTo(User, { foreignKey: "user_id", as: "technicien" });
+Ticket.hasMany(Intervention, { as: "intervention", foreignKey: "ticket_id" });
+Intervention.belongsTo(Ticket, { foreignKey: "ticket_id", as: "ticket" });
 
 /**
  * relation ManyToOne entre materiel et ticket
@@ -86,9 +81,17 @@ Client.hasMany(Materiel, { as: "materiel", foreignKey: "client_id" });
 Materiel.belongsTo(Client, { foreignKey: "client_id", as: "client" });
 
 /**
- * relation OneToOne entre statut et ticket
+ * relation ManyToOne entre user et intervention
+ * un user peut avoir plusieurs interventions
+ * une intervention n'est rattaché qu'à un seul client
  */
-Ticket.belongsTo(Statut, { foreignKey: "statut_id", as: "statut" });
+User.hasMany(Intervention, { as: "intervention", foreignKey: "user_id" });
+Intervention.belongsTo(User, { foreignKey: "user_id", as: "user" });
+
+/**
+ * relation OneToOne entre statut et intervention
+ */
+Intervention.belongsTo(Statut, { foreignKey: "statut_id", as: "statut" });
 
 //  initialisation à la bdd
 
@@ -106,10 +109,20 @@ function initDB() {
 function resetDB() {
   return sequelize
     .sync({ force: true })
-    .then(() => console.log("Base de donnéesréinitialisée."))
+    .then(() => console.log("Base de données réinitialisée."))
     .catch((error) =>
-      console.log(`La base de donnéess n'a pas été réinitialisée: ${error}`)
+      console.log(`La base de données n'a pas été réinitialisée: ${error}`)
     );
 }
 
-module.exports = { initDB, resetDB, User, Client, Materiel, Ticket, Statut };
+module.exports = {
+  initDB,
+  resetDB,
+  User,
+  Client,
+  Intervention,
+  Materiel,
+  Ticket,
+  Statut,
+  sequelize,
+};

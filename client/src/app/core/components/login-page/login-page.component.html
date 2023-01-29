@@ -1,3 +1,21 @@
-<p>login-page works!</p>
-
-<button (click)="connexion()">connexion</button>
+<main>
+  <form [formGroup]="loginForm" (submit)="submitLoginHandler()">
+    <!-- email -->
+    <div>
+      <label for="username">Email</label>
+      <input type="text" id="username" formControlName="username" (blur)="emailBlurHandler()"
+        [inputIsValid]="isEmailValid">
+      <p *ngIf="!isEmailValid">Saississez une adresse email valide</p>
+    </div>
+    <!-- password -->
+    <div>
+      <label for=" password">Mot de passe</label>
+      <input type="password" id="password" formControlName="password" (blur)="passwordBlurHandler()"
+        [inputIsValid]="isPasswordValid">
+      <p *ngIf="!isPasswordValid">Le mot de passe doit contenir huit caractères, une majuscule, une minuscule, un
+        chiffre et un caractère spécial</p>
+    </div>
+    <!-- bouton(s) -->
+    <button type="submit">Connexion</button>
+  </form>
+</main>
