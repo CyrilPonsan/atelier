@@ -13,17 +13,17 @@ async function getTicketDetails(ticketId) {
       {
         model: Intervention,
         as: "intervention",
-        attributes: ["date"],
+        attributes: ["id", "date", "description", "reponse"],
         include: [
           {
             model: Statut,
             as: "statut",
-            attributes: ["label"],
+            attributes: ["id", "label"],
           },
           {
             model: User,
             as: "user",
-            attributes: ["nom"],
+            attributes: ["id", "nom"],
           },
         ],
       },
@@ -34,10 +34,11 @@ async function getTicketDetails(ticketId) {
           {
             model: Client,
             as: "client",
-            attributes: ["raisonSociale"],
+            attributes: ["id", "raisonSociale"],
           },
         ],
         attributes: [
+          "id",
           "type",
           "marque",
           "modele",

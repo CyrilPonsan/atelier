@@ -66,7 +66,7 @@ export class LoginPageComponent implements OnInit {
 
   private handleResponse(response: any): void {
     if (response) {
-      this.router.navigateByUrl('/accueil');
+      this.router.navigateByUrl('/tickets');
     }
   }
 

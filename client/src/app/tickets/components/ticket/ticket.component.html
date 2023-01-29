@@ -1,0 +1,8 @@
+<main>
+  <section>
+    <p routerLink="/tickets/details/{{ticket.id}}">{{ticket.date | date: "dd MMMM yyyy"}}
+      {{ticketService.setStatutLabel(ticket.code)}} {{ticket.ref}}
+      {{ticket.materiel.client.raisonSociale}}
+      {{ticket.materiel.type}}</p>
+  </section>
+</main>

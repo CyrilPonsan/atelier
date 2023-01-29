@@ -7,6 +7,7 @@ const {
   Intervention,
   Statut,
   sequelize,
+  User,
 } = require("../../services/sequelize");
 
 async function getTickets(userId, offset, limit) {
@@ -15,26 +16,40 @@ async function getTickets(userId, offset, limit) {
       {
         model: Intervention,
         as: "intervention",
-        attributes: [],
+        attributes: ["id"],
         include: [
           {
             model: Statut,
             as: "statut",
-          },
+            //attributes: [],
+          } /* 
+          {
+            model: User,
+            as: "user",
+            attributes: ["id", "nom"],
+          }, */,
         ],
       },
       {
         model: Materiel,
         as: "materiel",
         attributes: ["type"],
+        include: [
+          {
+            model: Client,
+            as: "client",
+            attributes: ["raisonSociale"],
+          },
+        ],
       },
     ],
     attributes: [
       "id",
+      "ref",
       [sequelize.fn("MAX", sequelize.col("date")), "date"],
       [sequelize.fn("MAX", sequelize.col("code")), "code"],
     ],
-    group: ["ticket_id"],
+    group: ["intervention.ticket_id"],
     order: [["date", "DESC"]],
   });
 }

@@ -2,6 +2,9 @@ const {
   getTicketDetails,
 } = require("../../models/ticket.model/getTicketDetails");
 const { getTickets } = require("../../models/ticket.model/getTickets");
+const {
+  getTicketsStatutsList,
+} = require("../../models/ticket.model/getTicketStatutsList");
 const { getPagination } = require("../../services/queryService");
 const { regexNumber, badQuery, serverIssue } = require("../../utils/data");
 
@@ -36,9 +39,22 @@ async function httpGetTickets(req, res) {
 }
 
 async function httpGetTicketDetails(req, res) {
-  const ticketId = 1;
+  const ticketId = req.params.id;
   const ticketDetails = await getTicketDetails(ticketId);
   return res.status(200).json(ticketDetails);
 }
 
-module.exports = { httpGetTickets, httpGetTicketDetails };
+async function httpGetTicketStatutsList(req, res) {
+  try {
+    const statuts = await getTicketsStatutsList();
+    return res.status(200).json({ data: statuts });
+  } catch (error) {
+    return res.status(500).json({ message: serverIssue });
+  }
+}
+
+module.exports = {
+  httpGetTickets,
+  httpGetTicketDetails,
+  httpGetTicketStatutsList,
+};
