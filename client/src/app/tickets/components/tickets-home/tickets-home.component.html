@@ -1,1 +1,14 @@
-<app-ticket *ngFor="let ticket of ticketsList" [ticket]="ticket"></app-ticket>
+<main class="w-82 flex justify-center" @fade>
+  <section class="flex flex-col gap-y-4">
+    <article class="flex font-bold bg-black text-orange p-2 gap-x-8">
+      <p class="w-40">Date</p>
+      <p class="w-20">Statut</p>
+      <p class="w-24">Référence</p>
+      <p class="w-64">Client</p>
+      <p>Matériel</p>
+    </article>
+    <app-ticket *ngFor="let ticket of ticketsList" [ticket]="ticket" mx-auto></app-ticket>
+  </section>
+</main>
+<!--
+<app-modal *ngIf="showModal" [modal]="modal" (modalRightClick)="modalRightClickHandler()"></app-modal> -->

@@ -1,8 +1,7 @@
-<main>
-  <section>
-    <p routerLink="/tickets/details/{{ticket.id}}">{{ticket.date | date: "dd MMMM yyyy"}}
-      {{ticketService.setStatutLabel(ticket.code)}} {{ticket.ref}}
-      {{ticket.materiel.client.raisonSociale}}
-      {{ticket.materiel.type}}</p>
-  </section>
-</main>
+<section class="w-full cursor-pointer flex justify-start border-b-2 border-stone-300 hover:shadow-xl p-2 gap-x-8">
+  <p class="w-40 font-bold text-orange">{{ticket.date | date: "dd MMMM yyyy"}}</p>
+  <p class="w-20 font-bold">{{ticketService.setStatutLabel(ticket.code)}}</p>
+  <p class="w-24">{{ticket.ref}}</p>
+  <p class="w-64">{{ticket.materiel.client.raisonSociale.raisonSociale}}</p>
+  <p class="w-64 font-bold">{{ticket.materiel.typeMateriel.type}}</p>
+</section>

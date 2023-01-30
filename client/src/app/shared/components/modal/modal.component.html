@@ -1,0 +1,14 @@
+<p>modal works!</p>
+<div class="backdrop"></div>
+<div class="modal">
+  <div>
+    <div>{{modal.titre}}</div>
+    <div>{{modal.message}}</div>
+  </div>
+  <div>
+    <app-button [label]="leftLabel" [bg]="'orange'" *ngIf="modal.leftBtn"
+      (click)="leftBtnHandler()">{{modal.leftBtnLabel}}</app-button>
+
+    <app-button [label]="rightLabel" (click)="rightBtnHandler()">{{modal.rightBtn}}</app-button>
+  </div>
+</div>

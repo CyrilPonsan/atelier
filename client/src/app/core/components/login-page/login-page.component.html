@@ -49,14 +49,14 @@
         </span>
         <span class="w-64 md:w-96 flex justify-end">
 
-          <button
+          <!--  <button
             class=" min-w-[75px] md:min-w-[100px] shadow-5xl select-none px-1 py-2 md:p-4 active:translate-x-0.5 active:translate-y-0.5 hover:brightness-125 focus:outline-none focus:shadow-outline text-sm bg-black text-white font-bold"
             (click)="submitLoginHandler()" type="submit">se
             connecter
-          </button>
+          </button> -->
 
-          <!--    <app-button [text]="'se connecter'" type="submit" (click)="onSubmitForm()">
-          </app-button>-->
+          <app-button [label]="'se connecter'" type="submit" (click)="submitLoginHandler()">
+          </app-button>
         </span>
       </div>
     </form>

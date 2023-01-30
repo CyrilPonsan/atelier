@@ -65,7 +65,7 @@ async function createParc() {
         miseEnService: new Date(),
         url: url,
         client_id: j,
-        type_id: matos[rng].type,
+        typeMateriel_id: matos[rng].type,
         marque_id: matos[rng].marque,
         modele_id: matos[rng].modele,
         ref: ref,

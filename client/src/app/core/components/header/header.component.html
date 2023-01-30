@@ -1,1 +1,17 @@
-<p (click)="logoutHandler()">Logout</p>
+<header class="w-full h-[6vh] flex justify-end">
+  <ul class="p-4 flex gap-x-4 items-center" *ngIf="auth.isLoggedIn">
+    <li class="cursor-pointer" routerLink="/profile">
+      <img class="w-8 h-8" src="assets/images/icone-account.png" alt="icone profile" />
+    </li>
+    <li class="cursor-pointer" (click)="logoutHandler()">
+      <img class="w-8 h-[auto]" src="assets/images/icone-logout.png" alt="icone déconnexion" />
+    </li>
+  </ul>
+</header>
+<nav class="w-full h-[6vh] flex justify-center items-center">
+  <ul class="flex gap-x-8">
+    <li class="cursor-pointer" routerLink="/tickets" routerLinkActive="active">Tickets</li>
+    <li class="cursor-pointer" routerLink="/clients" routerLinkActive="active">Clients</li>
+    <li class="cursor-pointer" routerLink="/materiel" routerLinkActive="active">Parcs Informatiques</li>
+  </ul>
+</nav>

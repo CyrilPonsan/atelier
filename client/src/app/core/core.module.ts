@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import * as fr from '@angular/common/locales/fr';
 import { SharedModule } from '../shared/shared.module';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TicketsModule } from '../tickets/tickets.module';
 import { httpInterceptorProviders } from './interceptors';
 import { HeaderComponent } from './components/header/header.component';
