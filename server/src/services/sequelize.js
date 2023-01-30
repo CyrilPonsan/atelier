@@ -1,10 +1,13 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const UserModel = require("../models/sequelize.models.js/user.db.model");
+const ConseillerModel = require("../models/sequelize.models.js/conseiller.db.model");
 const ClientModel = require("../models/sequelize.models.js/client.db.model");
 const TicketModel = require("../models/sequelize.models.js/ticket.db.model");
 const MaterielModel = require("../models/sequelize.models.js/materiel.db.model");
 const StatutModel = require("../models/sequelize.models.js/statut.model");
 const InterventionModel = require("../models/sequelize.models.js/intervention.db.model");
+const RaisonSocialeModel = require("../models/sequelize.models.js/raisonSociale.db.model");
+const ModeleModel = require("../models/sequelize.models.js/modele.db.model");
+const MarqueModel = require("../models/sequelize.models.js/marque.db.model");
 
 //  paramètres de connexion à la bdd
 
@@ -46,12 +49,15 @@ if (process.env.NODE8ENV === "development") {
 
 //  entités de la bdd
 
-const User = UserModel(sequelize, DataTypes);
+const Conseiller = ConseillerModel(sequelize, DataTypes);
 const Client = ClientModel(sequelize, DataTypes);
 const Ticket = TicketModel(sequelize, DataTypes);
 const Materiel = MaterielModel(sequelize, DataTypes);
 const Statut = StatutModel(sequelize, DataTypes);
 const Intervention = InterventionModel(sequelize, DataTypes);
+const RaisonSociale = RaisonSocialeModel(sequelize, DataTypes);
+const Modele = ModeleModel(sequelize, DataTypes);
+const Marque = MarqueModel(sequelize, DataTypes);
 
 //  relations
 
@@ -81,17 +87,38 @@ Client.hasMany(Materiel, { as: "materiel", foreignKey: "client_id" });
 Materiel.belongsTo(Client, { foreignKey: "client_id", as: "client" });
 
 /**
- * relation ManyToOne entre user et intervention
- * un user peut avoir plusieurs interventions
+ * relation ManyToOne entre Conseiller et intervention
+ * un Conseiller peut avoir plusieurs interventions
  * une intervention n'est rattaché qu'à un seul client
  */
-User.hasMany(Intervention, { as: "intervention", foreignKey: "user_id" });
-Intervention.belongsTo(User, { foreignKey: "user_id", as: "user" });
+Conseiller.hasMany(Intervention, {
+  as: "intervention",
+  foreignKey: "conseiller_id",
+});
+Intervention.belongsTo(Conseiller, {
+  foreignKey: "Conseiller_id",
+  as: "conseiller",
+});
 
 /**
  * relation OneToOne entre statut et intervention
  */
 Intervention.belongsTo(Statut, { foreignKey: "statut_id", as: "statut" });
+
+RaisonSociale.hasMany(Client, {
+  as: "client",
+  foreignKey: "raison_sociale_id",
+});
+Client.belongsTo(RaisonSociale, {
+  foreignKey: "raison_sociale_id",
+  as: "raisonSociale",
+});
+
+Marque.hasMany(Materiel, { as: "materiel", foreignKey: "marque_id" });
+Materiel.belongsTo(Marque, { foreignKey: "marque_id", as: "marque" });
+
+Marque.hasMany(Modele, { as: "modele", foreignKey: "marque_id" });
+Modele.belongsTo(Marque, { foreignKey: "marque_id", as: "marque" });
 
 //  initialisation à la bdd
 
@@ -118,7 +145,7 @@ function resetDB() {
 module.exports = {
   initDB,
   resetDB,
-  User,
+  Conseiller,
   Client,
   Intervention,
   Materiel,

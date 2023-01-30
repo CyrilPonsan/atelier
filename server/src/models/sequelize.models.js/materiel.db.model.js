@@ -1,28 +1,20 @@
 function materielModel(sequelize, DataTypes) {
   return sequelize.define("materiel", {
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    marque: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    modele: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     miseEnService: {
       type: DataTypes.DATE,
       allowNull: true, // à confirmer
     },
-    etat: {
-      type: DataTypes.BOOLEAN,
+    ref: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     url: {
       type: DataTypes.STRING,
       allowNull: true, //  à confirmer
+    },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   });
 }

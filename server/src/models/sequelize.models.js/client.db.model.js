@@ -2,18 +2,15 @@ function clientModel(sequelize, DataTypes) {
   return sequelize.define(
     "client",
     {
-      raisonSociale: {
-        type: DataTypes.STRING,
-        allownull: false,
-        unique: {
-          msg: "Cette raison sociale est déjà enregistrée auprès de nos services.",
-        },
-      },
-      contact: {
+      nom: {
         type: DataTypes.STRING,
         allownull: false,
       },
-      numeroContrat: {
+      email: {
+        type: DataTypes.STRING,
+        allownull: false,
+      },
+      contrat: {
         type: DataTypes.INTEGER,
         allownull: false,
       },

@@ -1,4 +1,4 @@
-function userModel(sequelize, DataTypes) {
+function conseillerModel(sequelize, DataTypes) {
   return sequelize.define("user", {
     username: {
       type: DataTypes.STRING,
@@ -24,4 +24,4 @@ function userModel(sequelize, DataTypes) {
   });
 }
 
-module.exports = userModel;
+module.exports = conseillerModel;

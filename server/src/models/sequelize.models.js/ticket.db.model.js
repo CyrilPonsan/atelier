@@ -6,6 +6,14 @@ function ticketModel(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      titre: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      resume: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     { timestamps: false }
   );
