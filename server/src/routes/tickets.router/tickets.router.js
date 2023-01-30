@@ -8,8 +8,8 @@ const {
 
 const ticketsRouter = express.Router();
 
-ticketsRouter.get("/", httpGetTickets);
-ticketsRouter.get("/details/:id", httpGetTicketDetails);
-ticketsRouter.get("/statuts", httpGetTicketStatutsList);
+ticketsRouter.get("/", checkTokenValidity, httpGetTickets);
+ticketsRouter.get("/details/:id", checkTokenValidity, httpGetTicketDetails);
+ticketsRouter.get("/statuts", checkTokenValidity, httpGetTicketStatutsList);
 
 module.exports = { ticketsRouter };

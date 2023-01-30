@@ -74,7 +74,7 @@ export class AuthService {
     this.accessToken = '';
     this.refreshToken = '';
     this.isLoggedIn = false;
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/connexion');
   }
 
   setUser(): void {
@@ -84,7 +84,7 @@ export class AuthService {
 
   httpGenerateTokens(): Observable<any> {
     const refreshToken = this.refreshToken;
-    return this.http.post<any>(`${environment.baseUrl}/auth/refreshtoken`, {
+    return this.http.post<any>(`${environment.baseUrl}/auth/refresh-tokens`, {
       refreshToken,
     });
   }

@@ -8,6 +8,7 @@ const InterventionModel = require("../models/sequelize.models.js/intervention.db
 const RaisonSocialeModel = require("../models/sequelize.models.js/raisonSociale.db.model");
 const ModeleModel = require("../models/sequelize.models.js/modele.db.model");
 const MarqueModel = require("../models/sequelize.models.js/marque.db.model");
+const TypeMaterielModel = require("../models/sequelize.models.js/typeMateriel.db.model");
 
 //  paramètres de connexion à la bdd
 
@@ -58,6 +59,7 @@ const Intervention = InterventionModel(sequelize, DataTypes);
 const RaisonSociale = RaisonSocialeModel(sequelize, DataTypes);
 const Modele = ModeleModel(sequelize, DataTypes);
 const Marque = MarqueModel(sequelize, DataTypes);
+const TypeMateriel = TypeMaterielModel(sequelize, DataTypes);
 
 //  relations
 
@@ -96,7 +98,7 @@ Conseiller.hasMany(Intervention, {
   foreignKey: "conseiller_id",
 });
 Intervention.belongsTo(Conseiller, {
-  foreignKey: "Conseiller_id",
+  foreignKey: "conseiller_id",
   as: "conseiller",
 });
 
@@ -114,11 +116,20 @@ Client.belongsTo(RaisonSociale, {
   as: "raisonSociale",
 });
 
-Marque.hasMany(Materiel, { as: "materiel", foreignKey: "marque_id" });
-Materiel.belongsTo(Marque, { foreignKey: "marque_id", as: "marque" });
+TypeMateriel.hasMany(Materiel, {
+  as: "materiel",
+  foreignKey: "typeMateriel_id",
+});
+Materiel.belongsTo(TypeMateriel, {
+  as: "typeMateriel",
+  foreignKey: "typeMateriel_id",
+});
 
-Marque.hasMany(Modele, { as: "modele", foreignKey: "marque_id" });
-Modele.belongsTo(Marque, { foreignKey: "marque_id", as: "marque" });
+Marque.hasMany(Materiel, { as: "materiel", foreignKey: "marque_id" });
+Materiel.belongsTo(Marque, { as: "marque", foreignKey: "marque_id" });
+
+Modele.hasMany(Materiel, { as: "materiel", foreignKey: "modele_id" });
+Materiel.belongsTo(Marque, { as: "modele", foreignKey: "modele_id" });
 
 //  initialisation à la bdd
 
@@ -152,4 +163,8 @@ module.exports = {
   Ticket,
   Statut,
   sequelize,
+  RaisonSociale,
+  TypeMateriel,
+  Marque,
+  Modele,
 };

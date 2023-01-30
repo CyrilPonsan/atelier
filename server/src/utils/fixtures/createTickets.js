@@ -1,10 +1,7 @@
 const { Ticket, Intervention } = require("../../services/sequelize");
+const { _setRandomNumber } = require("../data");
 
 require("dotenv").config;
-
-const _setRandomNumber = (min, max) => {
-  return Math.random() * (max - min) + min;
-};
 
 let date = new Date("2021, 01, 01");
 let day = 0;
@@ -13,7 +10,12 @@ async function createTickets() {
   let ref = 5000;
   const tickets = [];
   for (let i = 1; i <= 25; i++) {
-    tickets.push({ ref: ref, materiel_id: _setRandomNumber(1, 1901) });
+    tickets.push({
+      ref: ref,
+      materiel_id: _setRandomNumber(1, 1500),
+      titre: "en panne",
+      resume: "lorem lorem",
+    });
     ref++;
   }
   const newTickets = await Ticket.bulkCreate(tickets);
@@ -26,6 +28,8 @@ async function createTickets() {
       ticket_id: i,
       statut_id: 1,
       user_id: 1,
+      titre: "depannage 1",
+      lieuIntervention: "distance",
     });
     interventions.push({
       date: _addDays(date, day++),
@@ -34,6 +38,8 @@ async function createTickets() {
       ticket_id: i,
       statut_id: 2,
       user_id: 1,
+      titre: "depannage 2",
+      lieuIntervention: "distance",
     });
     interventions.push({
       date: _addDays(date, day++),
@@ -42,6 +48,8 @@ async function createTickets() {
       ticket_id: i,
       statut_id: 4,
       user_id: 1,
+      titre: "depannage 3",
+      lieuIntervention: "distance",
     });
     interventions.push({
       date: new Date(),
@@ -50,6 +58,8 @@ async function createTickets() {
       ticket_id: i,
       statut_id: 5,
       user_id: 2,
+      lieuIntervention: "distance",
+      titre: "depannage 4",
     });
   }
   const newInterventions = await Intervention.bulkCreate(interventions);

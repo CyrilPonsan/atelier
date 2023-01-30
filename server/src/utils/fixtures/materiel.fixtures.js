@@ -1,60 +1,83 @@
 require("dotenv").config();
 
-const { Materiel } = require("../../services/sequelize");
+const {
+  Materiel,
+  Marque,
+  Modele,
+  TypeMateriel,
+} = require("../../services/sequelize");
+const { _setRandomNumber } = require("../data");
 
-url =
+const url =
   "https://worldofwarcraft.com/fr-fr/character/eu/dalaran/bab%C3%B8ul%C3%AFnet";
 
+const marques = [{ marque: "toto" }, { marque: "tata" }];
+
+const types = [
+  {
+    type: "serveur",
+  },
+  {
+    type: "terminal",
+  },
+  {
+    type: "imprimante",
+  },
+];
+
+const modeles = [
+  { modele: "mega coffee server" },
+  { modele: "toto-book 3000" },
+  { modele: "super printer 4000" },
+];
+
+const matos = [
+  {
+    type: 1,
+    marque: 2,
+    modele: 1,
+  },
+  {
+    type: 2,
+    marque: 1,
+    modele: 2,
+  },
+  {
+    type: 3,
+    marque: 1,
+    modele: 3,
+  },
+];
+
+async function createMMT() {
+  await TypeMateriel.bulkCreate(types);
+  await Marque.bulkCreate(marques);
+  await Modele.bulkCreate(modeles);
+}
+
 async function createParc() {
+  let ref = 2000;
   for (let j = 1; j <= 50; j++) {
     const parc = [];
-    parc.push({
-      type: "serveur",
-      marque: "tata",
-      modele: "mega server",
-      miseEnService: new Date(),
-      etat: true,
-      url: url,
-      client_id: j,
-    });
-    for (let i = 0; i < 2; i++) {
+    for (let i = 1; i <= 30; i++) {
+      const rng = _setRandomNumber(0, 2);
       parc.push({
-        type: "serveur",
-        marque: "tata",
-        modele: "super server",
         miseEnService: new Date(),
-        etat: true,
         url: url,
         client_id: j,
+        type_id: matos[rng].type,
+        marque_id: matos[rng].marque,
+        modele_id: matos[rng].modele,
+        ref: ref,
       });
-    }
-    for (let i = 0; i < 30; i++) {
-      parc.push({
-        type: "terminal",
-        marque: "toto",
-        modele: "toto-book",
-        miseEnService: new Date(),
-        etat: true,
-        url: url,
-        client_id: j,
-      });
-    }
-    for (let i = 0; i < 5; i++) {
-      parc.push({
-        type: "imprimante",
-        marque: "toto",
-        modele: "toto-printer",
-        miseEnService: new Date(),
-        etat: true,
-        url: url,
-        client_id: j,
-      });
+      ref++;
     }
     await Materiel.bulkCreate(parc);
   }
 }
 
 async function createMaterielFixtures() {
+  await createMMT();
   await createParc();
 }
 

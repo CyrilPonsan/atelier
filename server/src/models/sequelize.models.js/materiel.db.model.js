@@ -12,10 +12,6 @@ function materielModel(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true, //  à confirmer
     },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
   });
 }
 

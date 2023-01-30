@@ -35,7 +35,7 @@ async function httpLogin(req, res) {
       refreshToken: _getToken(user, refreshTimeLife),
     });
   } catch (error) {
-    return res.status(500).json({ error: serverIssue });
+    return res.status(500).json({ error: serverIssue + error });
   }
 }
 

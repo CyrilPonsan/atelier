@@ -15,7 +15,7 @@ function interventionModel(sequeleize, DataTypes) {
         allowNull: false,
       },
       titre: {
-        type: DataTypes.SRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       lieuIntervention: {

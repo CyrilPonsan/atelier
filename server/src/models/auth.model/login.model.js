@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 
-const { User } = require("../../services/sequelize");
+const { Conseiller } = require("../../services/sequelize");
 
 async function login(username, password) {
-  const user = await User.findOne({
+  const user = await Conseiller.findOne({
     where: { username: username },
   });
   if (!user) {

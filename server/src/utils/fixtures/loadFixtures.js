@@ -1,6 +1,6 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-const { User } = require("../../services/sequelize");
+const { Conseiller } = require("../../services/sequelize");
 const { createClientsFixtures } = require("./clients.fixtures");
 const { createTickets } = require("./createTickets");
 const { createMaterielFixtures } = require("./materiel.fixtures");
@@ -13,17 +13,17 @@ async function createUsers() {
     username: "tech@atelier.eco",
     password: hash,
     roles: ["tech"],
-    nom: "jean",
-    prenom: "dupont",
+    nom: "dupont",
+    prenom: "bob",
   });
   users.push({
     username: "admin@atelier.eco",
     password: hash,
     roles: ["tech", "admin"],
-    nom: "bob",
-    prenom: "dupont",
+    nom: "sam",
+    prenom: "francisco",
   });
-  await User.bulkCreate(users);
+  await Conseiller.bulkCreate(users);
 }
 
 async function loadfixtures() {

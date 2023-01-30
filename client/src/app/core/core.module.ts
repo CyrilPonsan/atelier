@@ -9,9 +9,10 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TicketsModule } from '../tickets/tickets.module';
 import { httpInterceptorProviders } from './interceptors';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [LoginPageComponent],
+  declarations: [LoginPageComponent, HeaderComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
@@ -19,6 +20,7 @@ import { httpInterceptorProviders } from './interceptors';
     SharedModule,
     TicketsModule,
   ],
+  exports: [HeaderComponent],
   providers: [
     httpInterceptorProviders,
     { provide: LOCALE_ID, useValue: 'fr-FR' },
