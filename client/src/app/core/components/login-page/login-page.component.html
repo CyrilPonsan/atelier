@@ -1,13 +1,11 @@
-<main>
+<!-- <main>
   <form [formGroup]="loginForm" (submit)="submitLoginHandler()">
-    <!-- email -->
     <div>
       <label for="username">Email</label>
       <input type="text" id="username" formControlName="username" (blur)="emailBlurHandler()"
         [inputIsValid]="isEmailValid">
       <p *ngIf="!isEmailValid">Saississez une adresse email valide</p>
     </div>
-    <!-- password -->
     <div>
       <label for=" password">Mot de passe</label>
       <input type="password" id="password" formControlName="password" (blur)="passwordBlurHandler()"
@@ -15,7 +13,52 @@
       <p *ngIf="!isPasswordValid">Le mot de passe doit contenir huit caractères, une majuscule, une minuscule, un
         chiffre et un caractère spécial</p>
     </div>
-    <!-- bouton(s) -->
     <button type="submit">Connexion</button>
   </form>
+</main> -->
+
+
+<main class="flex justify-center flex-col items-center gap-y-8 mb-8">
+  <section *ngIf="!loader" class="w-64 md:w-96">
+    <h2 class="flex justify-start md:text-3xl text-xl font-bold">Connexion</h2>
+  </section>
+  <section class="flex flex-col">
+    <!--  <div *ngIf="loader" class="lds-dual-ring"></div> -->
+    <form *ngIf="!loader" class="flex flex-col w-64 md:w-96 gap-y-4" [formGroup]="loginForm">
+
+      <!-- email -->
+      <label for="email">Email :</label>
+      <input
+        class="border-stone-300 border-2 w-full p-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        #email type="username" id="username" formControlName="username" (blur)="emailBlurHandler()"
+        (keyup)="emailKeyupHandler(email.value)" [inputIsValid]="isEmailValid">
+      <p *ngIf="!isEmailValid">Saississez une adresse email valide</p>
+      <!-- password -->
+      <label for="password">Mot de Passe :</label>
+      <input
+        class="border-stone-300 border-2 w-full p-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        #password id="password" formControlName="password" (keyup)="passwordKeyupHandler(password.value)"
+        (blur)="passwordBlurHandler()" [inputIsValid]="isPasswordValid">
+      <p *ngIf="!isPasswordValid">Le mot de passe doit contenir huit caractères, une majuscule, une minuscule, un
+        chiffre et un caractère spécial</p>
+
+      <!-- buttons -->
+      <div class="flex justify-between items-baseline w-64 md:w-96 gap-y-5">
+        <span class="flex justify-center w-64 md:w-96">
+          <a routerLink="/password-reset" class="text-xs md:text-sm underline">Mot de passe oublié</a>
+        </span>
+        <span class="w-64 md:w-96 flex justify-end">
+
+          <button
+            class=" min-w-[75px] md:min-w-[100px] shadow-5xl select-none px-1 py-2 md:p-4 active:translate-x-0.5 active:translate-y-0.5 hover:brightness-125 focus:outline-none focus:shadow-outline text-sm bg-black text-white font-bold"
+            (click)="submitLoginHandler()" type="submit">se
+            connecter
+          </button>
+
+          <!--    <app-button [text]="'se connecter'" type="submit" (click)="onSubmitForm()">
+          </app-button>-->
+        </span>
+      </div>
+    </form>
+  </section>
 </main>
