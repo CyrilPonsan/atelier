@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { environment } from 'src/environments/environment';
-import { Statut } from '../models/statut.model';
-import { Ticket } from '../models/ticket.model';
+
+import { Statut, Ticket } from '../models/ticket.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,7 @@
 export interface Statut {
   id: number;
   label: string;
+  code: number;
 }
 
 export interface Intervention {
