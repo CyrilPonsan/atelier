@@ -40,6 +40,7 @@ async function getTickets(userId, offset, limit) {
                 attributes: ["raisonSociale"],
               },
             ],
+            attributes: ["id"],
           },
           {
             model: TypeMateriel,
@@ -47,6 +48,7 @@ async function getTickets(userId, offset, limit) {
             attributes: ["type"],
           },
         ],
+        attributes: ["id"],
       },
     ],
     attributes: [

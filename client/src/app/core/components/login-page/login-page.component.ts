@@ -45,23 +45,11 @@ export class LoginPageComponent implements OnInit {
     );
   }
 
-  emailKeyupHandler(email: string): void {
-    if (this.isEmailModified) {
-      this.isEmailValid = this.regex.regexMail.test(email);
-    }
-  }
-
   passwordBlurHandler(): void {
     this.isPasswordModified = true;
     this.isPasswordValid = this.regex.regexPassword.test(
       this.loginForm.value.password
     );
-  }
-
-  passwordKeyupHandler(password: string): void {
-    if (this.isPasswordModified) {
-      this.isPasswordValid = this.regex.regexPassword.test(password);
-    }
   }
 
   submitLoginHandler(): void {

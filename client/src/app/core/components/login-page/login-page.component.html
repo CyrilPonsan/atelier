@@ -30,15 +30,14 @@
       <label for="email">Email :</label>
       <input
         class="border-stone-300 border-2 w-full p-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        #email type="username" id="username" formControlName="username" (blur)="emailBlurHandler()"
-        (keyup)="emailKeyupHandler(email.value)" [inputIsValid]="isEmailValid">
+        id="username" formControlName="username" (blur)="emailBlurHandler()" [inputIsValid]="isEmailValid">
       <p *ngIf="!isEmailValid">Saississez une adresse email valide</p>
       <!-- password -->
       <label for="password">Mot de Passe :</label>
       <input
         class="border-stone-300 border-2 w-full p-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        #password id="password" formControlName="password" (keyup)="passwordKeyupHandler(password.value)"
-        (blur)="passwordBlurHandler()" [inputIsValid]="isPasswordValid">
+        type="password" id="password" formControlName="password" (blur)="passwordBlurHandler()"
+        [inputIsValid]="isPasswordValid">
       <p *ngIf="!isPasswordValid">Le mot de passe doit contenir huit caractères, une majuscule, une minuscule, un
         chiffre et un caractère spécial</p>
 

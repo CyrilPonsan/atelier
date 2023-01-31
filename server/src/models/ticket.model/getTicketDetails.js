@@ -39,7 +39,7 @@ async function getTicketDetails(ticketId) {
         ],
         attributes: [
           "id",
-          "type",
+          "typeMateriel",
           "marque",
           "modele",
           "createdAt",

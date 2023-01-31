@@ -15,12 +15,12 @@ export class InputIsValidDirective {
       this.elem.nativeElement.style.border = 'solid 1px red';
     }
   }
-
+  /*
   @HostListener('keyup') onChange() {
     if (this.value) {
       this.elem.nativeElement.style.border = 'solid 1px green';
     } else {
       this.elem.nativeElement.style.border = 'solid 1px red';
     }
-  }
+  } */
 }
