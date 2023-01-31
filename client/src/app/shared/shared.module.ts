@@ -8,6 +8,7 @@ import { RegexService } from './services/regex.service';
 import { PaginationService } from './services/pagination.service';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { BtnPagesComponent } from './components/btn-pages/btn-pages.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { BtnPagesComponent } from './components/btn-pages/btn-pages.component';
     ButtonComponent,
     PaginationComponent,
     BtnPagesComponent,
+    SearchComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [
@@ -25,6 +27,7 @@ import { BtnPagesComponent } from './components/btn-pages/btn-pages.component';
     ButtonComponent,
     PaginationComponent,
     BtnPagesComponent,
+    SearchComponent,
   ],
   providers: [RegexService, PaginationService],
 })

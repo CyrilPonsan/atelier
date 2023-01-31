@@ -4,7 +4,7 @@
     <p>Ouvert le : {{ticket.intervention[0].date | date: 'dd MMMM yyyy'}}</p>
     <p>Client : </p>
     <p>{{ticket.materiel.client.raisonSociale}}</p>
-    <p>Materiel : {{ticket.materiel.type}}</p>
+    <p>Materiel : {{ticket.materiel.typeMateriel.type}}</p>
     <p>Marque : {{ticket.materiel.marque}}</p>
     <p>Modèle : {{ticket.materiel.modele}}</p>
     <p (click)="urlHandler()">{{ticket.materiel.url}}</p>

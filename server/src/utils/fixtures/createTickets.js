@@ -27,7 +27,7 @@ async function createTickets() {
       reponse: "Ipsum Lorem bla bla bla",
       ticket_id: i,
       statut_id: 1,
-      user_id: 1,
+      conseiller_id: 1,
       titre: "depannage 1",
       lieuIntervention: "distance",
     });
@@ -37,7 +37,7 @@ async function createTickets() {
       reponse: "Ipsum Lorem bla bla bla",
       ticket_id: i,
       statut_id: 2,
-      user_id: 1,
+      conseiller_id: 1,
       titre: "depannage 2",
       lieuIntervention: "distance",
     });
@@ -47,7 +47,7 @@ async function createTickets() {
       reponse: "Ipsum Lorem bla bla bla",
       ticket_id: i,
       statut_id: 4,
-      user_id: 1,
+      conseiller_id: 1,
       titre: "depannage 3",
       lieuIntervention: "distance",
     });
@@ -57,7 +57,7 @@ async function createTickets() {
       reponse: "Ipsum Lorem bla bla bla",
       ticket_id: i,
       statut_id: 5,
-      user_id: 2,
+      conseiller_id: 2,
       lieuIntervention: "distance",
       titre: "depannage 4",
     });

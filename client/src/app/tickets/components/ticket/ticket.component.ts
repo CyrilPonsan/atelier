@@ -11,4 +11,8 @@ export class TicketComponent {
   @Input() ticket!: any;
 
   constructor(public ticketService: TicketsService, private router: Router) {}
+
+  ticketClickHandler(): void {
+    this.router.navigate(['/tickets/details', this.ticket.id]);
+  }
 }

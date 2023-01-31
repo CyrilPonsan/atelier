@@ -4,7 +4,11 @@ const {
   Client,
   Intervention,
   Statut,
-  User,
+  Conseiller,
+  RaisonSociale,
+  TypeMateriel,
+  Modele,
+  Marque,
 } = require("../../services/sequelize");
 
 async function getTicketDetails(ticketId) {
@@ -21,8 +25,8 @@ async function getTicketDetails(ticketId) {
             attributes: ["id", "label"],
           },
           {
-            model: User,
-            as: "user",
+            model: Conseiller,
+            as: "conseiller",
             attributes: ["id", "nom"],
           },
         ],
@@ -34,22 +38,35 @@ async function getTicketDetails(ticketId) {
           {
             model: Client,
             as: "client",
-            attributes: ["id", "raisonSociale"],
+            include: [
+              {
+                model: RaisonSociale,
+                as: "raisonSociale",
+                attributes: ["raisonSociale"],
+              },
+            ],
+            attributes: ["id"],
+          },
+          {
+            model: TypeMateriel,
+            as: "typeMateriel",
+            attributes: ["type"],
+          },
+          {
+            model: Marque,
+            as: "marque",
+            attributes: ["marque"],
+          },
+          {
+            model: Modele,
+            as: "modele",
+            attributes: ["modele"],
           },
         ],
-        attributes: [
-          "id",
-          "typeMateriel",
-          "marque",
-          "modele",
-          "createdAt",
-          "updatedAt",
-          "etat",
-          "miseEnService",
-          "url",
-        ],
+        attributes: ["id", "createdAt", "updatedAt", "miseEnService", "url"],
       },
     ],
+    order: [["intervention", "date", "DESC"]],
   });
 }
 

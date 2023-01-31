@@ -1,6 +1,6 @@
 <article *ngIf="intervention">
   <p>date : {{intervention.date | date : 'dd MMMM yyyy'}} {{intervention.statut.label}} conseiller :
-    {{intervention.user.nom}}</p>
+    {{intervention.conseiller.nom}}</p>
   <p>Decription : {{intervention.description}}</p>
   <p>Réponse : {{intervention.reponse}}</p>
 </article>

@@ -11,7 +11,7 @@ const {
   TypeMateriel,
 } = require("../../services/sequelize");
 
-async function getTickets(userId) {
+async function getTickets(userId, sort, order) {
   return await Ticket.findAll({
     include: [
       {

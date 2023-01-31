@@ -1,4 +1,5 @@
-<section class="w-full cursor-pointer flex justify-start border-b-2 border-stone-300 hover:shadow-lg p-2 gap-x-8">
+<section class="w-full cursor-pointer flex justify-start border-b-2 border-stone-300 hover:shadow-lg p-2 gap-x-8"
+  (click)="ticketClickHandler()">
   <p class="w-40 font-bold text-orange">{{ticket.date | date: "dd MMMM yyyy"}}</p>
   <p class="w-20 font-bold">{{ticketService.setStatutLabel(ticket.code)}}</p>
   <p class="w-24">{{ticket.ref}}</p>

@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Intervention } from '../../models/intervention.model';
-import { Ticket } from '../../models/ticket.model';
+import { Intervention, Ticket } from '../../models/ticket.model';
 import { TicketsService } from '../../services/tickets.service';
 
 @Component({

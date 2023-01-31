@@ -6,7 +6,12 @@ const {
   getTicketsStatutsList,
 } = require("../../models/ticket.model/getTicketStatutsList");
 const { getPagination } = require("../../services/queryService");
-const { regexNumber, badQuery, serverIssue } = require("../../utils/data");
+const {
+  regexNumber,
+  badQuery,
+  serverIssue,
+  noData,
+} = require("../../utils/data");
 
 async function httpGetTickets(req, res) {
   const userId = 1; //req.auth.userId;
@@ -42,8 +47,22 @@ async function httpGetTickets(req, res) {
 
 async function httpGetTicketDetails(req, res) {
   const ticketId = req.params.id;
-  const ticketDetails = await getTicketDetails(ticketId);
-  return res.status(200).json(ticketDetails);
+
+  if (!ticketId || !regexNumber.test(ticketId)) {
+    return res.status(400).json({ message: badQuery });
+  }
+
+  try {
+    const ticketDetails = await getTicketDetails(ticketId);
+
+    if (!ticketDetails) {
+      return res.status(404).json({ message: noData });
+    }
+
+    return res.status(200).json(ticketDetails);
+  } catch (error) {
+    return res.status(500).json({ message: serverIssue + error });
+  }
 }
 
 async function httpGetTicketStatutsList(req, res) {
