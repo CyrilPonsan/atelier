@@ -1,5 +1,5 @@
 function conseillerModel(sequelize, DataTypes) {
-  return sequelize.define("user", {
+  return sequelize.define("conseiller", {
     username: {
       type: DataTypes.STRING,
       allowNull: false,

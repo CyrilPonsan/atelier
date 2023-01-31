@@ -10,27 +10,29 @@ const { regexNumber, badQuery, serverIssue } = require("../../utils/data");
 
 async function httpGetTickets(req, res) {
   const userId = 1; //req.auth.userId;
-  const page = req.query.page || 1;
-  const limit = req.query.lmt || 10;
+  const off = req.query.off;
+  const lmt = req.query.lmt;
+  console.log(req.query);
 
   if (
     !userId ||
     !regexNumber.test(userId) ||
-    !page ||
-    !regexNumber.test(page) ||
-    !limit ||
-    !regexNumber.test(limit)
+    !off ||
+    !regexNumber.test(off) ||
+    !lmt ||
+    !regexNumber.test(lmt)
   ) {
     return res.status(400).json({ message: badQuery });
   }
 
   try {
-    const offset = getPagination(page);
-    const tickets = await getTickets(userId, offset, limit);
+    let tickets = await getTickets(userId);
+    const total = tickets.length;
+    tickets = _filtrageCourriers(tickets, +off, +lmt);
     return res.status(200).json({
       message:
         tickets.length === 0 ? "liste vide" : "tickets récupérés avec succès",
-      total: tickets.length,
+      total: total,
       data: tickets,
     });
   } catch (err) {
@@ -52,6 +54,23 @@ async function httpGetTicketStatutsList(req, res) {
     return res.status(500).json({ message: serverIssue });
   }
 }
+
+//  filtrage des courriers, filter = true : historique, filter = false : envois en cours
+const _filtrageCourriers = (tab, offset, limit) => {
+  console.log("limit", limit);
+  let size;
+  if (tab.length < limit * (offset + 1)) {
+    size = tab.length;
+  } else {
+    size = limit * (offset + 1);
+  }
+  let tmp = [];
+  for (let i = offset * limit; i < size; i++) {
+    tmp = [...tmp, tab[i]];
+  }
+  console.log("size", tmp.length);
+  return tmp;
+};
 
 module.exports = {
   httpGetTickets,

@@ -1,0 +1,33 @@
+<div class="button-group w-full flex-col md:flex md:flex-row justify-start items-center gap-x-4 text-xs md:text-sm">
+  <!-- *ngIf="courriers && !loader" -->
+  <!--
+    <button
+        class="border-2 py-1 px-2 bg-stone-300 text-black rounded cursor-pointer hover:bg-stone-200 active:translate-x-0.5 active:translate-y-0.5"
+        [ngStyle]="{visibility: pagination.previous}" (click)="onClickPrevious()"> {{"<"}}
+    </button>
+--><label class="flex items-center gap-x-2">{{label | titlecase}} par page
+    <select (change)="onSetMax($event)" value="{{this.pagination.max}}"
+      class="shadow border-stone-300 w-24 p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <!-- <option value="100">100</option> -->
+    </select></label>
+  <div class="flex items-center gap-x-2 text-xs md:text-sm">
+    <app-btn-pages [label]="'<'" [ngStyle]="{visibility: pagination.previous}" (click)="onClickPrevious()">
+    </app-btn-pages>
+    <p class="text-xs">{{pagination.page + 1}} / {{pagination.totalPages}}</p>
+    <!--
+            <button
+                class="border-2 py-1 px-2 bg-stone-300 text-black rounded cursor-pointer hover:bg-stone-200 active:translate-x-0.5 active:translate-y-0.5"
+                [ngStyle]="{visibility: pagination.next}" (click)="onClickNext()"> {{">"}}
+            </button>
+             -->
+    <app-btn-pages [label]="'>'" [ngStyle]="{visibility: pagination.next}" (click)="onClickNext()">
+    </app-btn-pages>
+    <p>&nbsp;Total : </p>
+    <p class="text-orange font-bold">{{pagination.total}}</p>
+    <p>{{label | lowercase}}</p>
+  </div>
+</div>

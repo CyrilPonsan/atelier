@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fade } from 'src/app/shared/animations/animations';
+import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { TicketsService } from '../../services/tickets.service';
 
 @Component({
@@ -10,30 +11,46 @@ import { TicketsService } from '../../services/tickets.service';
 })
 export class TicketsHomeComponent implements OnInit {
   ticketsList!: any[];
-  showModal = true;
-  modal = {
-    titre: 'Erreur',
-    message: 'Problème coté serveur, allez dormir !',
-    rightBtn: 'fermer',
-  };
-
-  constructor(private ticketsService: TicketsService) {}
+  constructor(
+    public pagination: PaginationService,
+    private ticketsService: TicketsService
+  ) {}
 
   ngOnInit(): void {
+    this.pagination.page = 0;
+
     if (!this.ticketsService.statuts) {
       this.ticketsService.httpGetTicketStatutsList();
     }
-
-    this.ticketsService.httpGetTickets().subscribe({
-      next: this.handleResponse.bind(this),
-    });
+    this.getTickets();
   }
 
-  modalRightClickHandler(): void {
-    this.showModal = false;
+  nextClickHandler(): void {
+    this.pagination.page++;
+    this.getTickets();
+  }
+
+  previousClickHandler(): void {
+    this.pagination.page--;
+    this.getTickets();
+  }
+
+  setMax(value: number): void {
+    this.pagination.page = 0;
+    this.pagination.max = value;
+    this.getTickets();
   }
 
   private handleResponse(response: any) {
     this.ticketsList = response.data;
+    this.pagination.total = response.total;
+    this.pagination.setButtonsStyle(this.ticketsList.length);
+    this.pagination.setPagesMax(response.total);
+  }
+
+  private getTickets(): void {
+    this.ticketsService.httpGetTickets().subscribe({
+      next: this.handleResponse.bind(this),
+    });
   }
 }

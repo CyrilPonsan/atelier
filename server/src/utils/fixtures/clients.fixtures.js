@@ -26,7 +26,7 @@ async function createClients() {
       email: `contact_${i + 1}@entreprise.com`,
       contrat: contrat++,
       telephone: i + 1 < 10 ? `00${i + 1}` : `0${i + 1}`,
-      adresse: `${i + 1} rue du Business`,
+      adresse: `${i + 1} rue Xavier Pinson`,
       codePostal: "64000",
       ville: "San Francisco sur Adour",
       raison_sociale_id: _setRandomNumber(1, 2),

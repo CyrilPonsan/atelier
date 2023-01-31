@@ -52,7 +52,7 @@ async function createTickets() {
       lieuIntervention: "distance",
     });
     interventions.push({
-      date: new Date(),
+      date: _addDays(date, day++),
       description: "Lorem Ipsum bla bla bla",
       reponse: "Ipsum Lorem bla bla bla",
       ticket_id: i,

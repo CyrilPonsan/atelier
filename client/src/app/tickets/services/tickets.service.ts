@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { environment } from 'src/environments/environment';
 import { Statut } from '../models/statut.model';
 import { Ticket } from '../models/ticket.model';
@@ -11,10 +12,12 @@ import { Ticket } from '../models/ticket.model';
 export class TicketsService {
   statuts!: Statut[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private pag: PaginationService) {}
 
   httpGetTickets(): Observable<any> {
-    return this.http.get<any>(`${environment.baseUrl}/tickets/`);
+    return this.http.get<any>(
+      `${environment.baseUrl}/tickets?off=${this.pag.page}&lmt=${this.pag.max}`
+    );
   }
 
   httpGetTicketStatutsList(): void {

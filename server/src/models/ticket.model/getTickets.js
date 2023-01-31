@@ -7,13 +7,12 @@ const {
   Intervention,
   Statut,
   sequelize,
-  User,
   RaisonSociale,
   TypeMateriel,
 } = require("../../services/sequelize");
 
-async function getTickets(userId, offset, limit) {
-  const tickets = await Ticket.findAll({
+async function getTickets(userId) {
+  return await Ticket.findAll({
     include: [
       {
         model: Intervention,
@@ -60,22 +59,6 @@ async function getTickets(userId, offset, limit) {
     group: ["intervention.ticket_id"],
     order: [["date", "DESC"]],
   });
-  return _filtrageCourriers(tickets, 1, 15);
 }
-
-//  filtrage des courriers, filter = true : historique, filter = false : envois en cours
-const _filtrageCourriers = (tab, offset, limit) => {
-  let size;
-  if (tab.length < limit * (offset + 1)) {
-    size = tab.length;
-  } else {
-    size = limit * (offset + 1);
-  }
-  let tmp = [];
-  for (let i = offset * limit; i < size; i++) {
-    tmp = [...tmp, tab[i]];
-  }
-  return tmp;
-};
 
 module.exports = { getTickets };

@@ -1,14 +1,24 @@
-<main class="w-82 flex justify-center" @fade>
-  <section class="flex flex-col gap-y-4">
-    <article class="flex font-bold bg-black text-orange p-2 gap-x-8">
-      <p class="w-40">Date</p>
-      <p class="w-20">Statut</p>
-      <p class="w-24">Référence</p>
-      <p class="w-64">Client</p>
-      <p>Matériel</p>
-    </article>
-    <app-ticket *ngFor="let ticket of ticketsList" [ticket]="ticket" mx-auto></app-ticket>
-  </section>
-</main>
-<!--
+<main class="flex justify-center">
+  <div class="flex flex-col justify-center items-end" @fade>
+    <section class="flex flex-col gap-y-4">
+      <div class="w-40 flex items-center justify-end  border-2 border-stone-300 pl-2 pr-8">
+        <img class="w-6 h-6" src="assets/img/icone-loupe.png" alt="">
+        <input
+          class="shadow appearance-none p-2 md:p-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="searchInput" autocomplete="off" placeholder="Recherche...">
+      </div>
+      <article class="flex font-bold bg-black text-orange p-2 gap-x-8">
+        <p class="w-40">Date</p>
+        <p class="w-20">Statut</p>
+        <p class="w-24">Référence</p>
+        <p class="w-32">Client</p>
+        <p class="w<-32">Matériel</p>
+      </article>
+      <app-ticket *ngFor="let ticket of ticketsList" [ticket]="ticket" mx-auto></app-ticket>
+    </section>
+    <section><app-pagination (max)="setMax($event)" (previous)="previousClickHandler()" (next)="nextClickHandler()"
+        [label]="'tickets'"></app-pagination></section>
+  </div>
+  <!--
 <app-modal *ngIf="showModal" [modal]="modal" (modalRightClick)="modalRightClickHandler()"></app-modal> -->
+</main>
