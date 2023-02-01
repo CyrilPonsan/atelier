@@ -1,10 +1,10 @@
-<form [formGroup]="searchForm" class="flex gap-x-2">
+<form class="flex gap-x-2">
   <div class="flex items-center justify-end  border-2 border-stone-300 pl-2 pr-8">
     <img class="w-6 h-6" src="assets/images/icone-loupe.png" alt="icone recherche">
     <input class="shadow appearance-none p-2 md:p-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      id="searchInput" formControlName="valueToSearch" autocomplete="off" placeholder="Recherche...">
+      id="searchInput" autocomplete="off" placeholder="Recherche..." #search (keyup)="searchHandler(search.value)">
   </div>
-  <div>
-    <app-button [label]="'chercher'" (click)="submitHandler()"></app-button>
-  </div>
+  <!--   <div>
+    <app-button [label]="'chercher'"></app-button>
+  </div> -->
 </form>

@@ -31,9 +31,9 @@ export class TicketsService {
       .subscribe();
   }
 
-  httpGetTicketDetails(ticketId: string): Observable<Ticket> {
+  httpGetTicketDetails(ticketRef: string): Observable<Ticket> {
     return this.http.get<Ticket>(
-      `${environment.baseUrl}/tickets/details/${ticketId}`
+      `${environment.baseUrl}/tickets/details/${ticketRef}`
     );
   }
   /*

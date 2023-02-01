@@ -6,7 +6,6 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -15,10 +14,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 export class AuthInterceptor implements HttpInterceptor {
   accessToken!: string;
 
-  constructor(
-    private authService: AuthService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private authService: AuthService) {}
 
   intercept(
     req: HttpRequest<any>,
