@@ -1,6 +1,19 @@
-<article *ngIf="intervention">
-  <p>date : {{intervention.date | date : 'dd MMMM yyyy'}} {{intervention.statut.label}} conseiller :
-    {{intervention.conseiller.nom}}</p>
-  <p>Decription : {{intervention.description}}</p>
-  <p>Réponse : {{intervention.reponse}}</p>
+<article class="flex flex-col p-4 border-stone-800 border w-full shadow-lg" *ngIf="intervention">
+  <span class="flex gap-x-4 font-bold">
+    <p>{{htmlItems.date}} : {{intervention.date | date : 'dd MMMM yyyy'}}</p>
+    <p>{{intervention.titre | titlecase}}</p>
+  </span>
+  <span class="flex">
+    <p class="font-bold">{{intervention.statut.label | titlecase}}</p>
+    <p>&nbsp;par {{intervention.conseiller.prenom | titlecase}}
+      {{intervention.conseiller.nom | titlecase}}</p>
+  </span>
+  <span>
+    <p class="font-bold">{{htmlItems.description}} :&nbsp;</p>
+    <p>{{intervention.description}}</p>
+  </span>
+  <span>
+    <p class="font-bold">{{htmlItems.reponse}} :&nbsp;</p>
+    <p>{{intervention.reponse}}</p>
+  </span>
 </article>

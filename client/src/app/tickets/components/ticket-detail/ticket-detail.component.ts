@@ -31,6 +31,8 @@ export class TicketDetailComponent implements OnInit {
     window.open(this.ticket.materiel.modele.url, '_blank');
   }
 
+  addInterventionHandler(): void {}
+
   private handleResponse(response: Ticket): void {
     this.ticket = response;
     this.interventions = this.ticket.intervention;

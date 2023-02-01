@@ -9,6 +9,7 @@ import { PaginationService } from './services/pagination.service';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { BtnPagesComponent } from './components/btn-pages/btn-pages.component';
 import { SearchComponent } from './components/search/search.component';
+import { NewInterventionFormComponent } from './components/new-intervention-form/new-intervention-form.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SearchComponent } from './components/search/search.component';
     PaginationComponent,
     BtnPagesComponent,
     SearchComponent,
+    NewInterventionFormComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [
@@ -28,6 +30,7 @@ import { SearchComponent } from './components/search/search.component';
     PaginationComponent,
     BtnPagesComponent,
     SearchComponent,
+    NewInterventionFormComponent,
   ],
   providers: [RegexService, PaginationService],
 })

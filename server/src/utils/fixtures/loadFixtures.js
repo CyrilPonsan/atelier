@@ -20,8 +20,8 @@ async function createUsers() {
     username: "admin@atelier.eco",
     password: hash,
     roles: ["tech", "admin"],
-    nom: "sam",
-    prenom: "francisco",
+    nom: "francisco",
+    prenom: "sam",
   });
   await Conseiller.bulkCreate(users);
 }

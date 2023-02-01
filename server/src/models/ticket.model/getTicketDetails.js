@@ -18,7 +18,14 @@ async function getTicketDetails(ticketRef) {
       {
         model: Intervention,
         as: "intervention",
-        attributes: ["id", "date", "description", "reponse"],
+        attributes: [
+          "id",
+          "lieuIntervention",
+          "date",
+          "description",
+          "reponse",
+          "titre",
+        ],
         include: [
           {
             model: Statut,
@@ -28,7 +35,7 @@ async function getTicketDetails(ticketRef) {
           {
             model: Conseiller,
             as: "conseiller",
-            attributes: ["id", "nom"],
+            attributes: ["id", "nom", "prenom"],
           },
         ],
       },

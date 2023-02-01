@@ -8,4 +8,10 @@ import { Intervention } from '../../models/ticket.model';
 })
 export class InterventionComponent {
   @Input() intervention!: Intervention;
+  htmlItems: any = {
+    date: 'Date',
+    conseiller: 'Conseiller',
+    description: 'Description',
+    reponse: 'Réponse',
+  };
 }

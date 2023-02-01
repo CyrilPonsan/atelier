@@ -11,10 +11,13 @@ export interface Intervention {
   reponse: string;
   statut: Statut;
   conseiller: Conseiller;
+  titre: string;
+  lieuIntervention: string;
 }
 
 export interface Conseiller {
   nom: string;
+  prenom: string;
 }
 
 export interface RaisonSociale {

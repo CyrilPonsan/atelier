@@ -23,8 +23,11 @@ async function createTickets() {
   for (let i = 1; i <= 25; i++) {
     interventions.push({
       date: _addDays(date, day++),
-      description: "Lorem Ipsum bla bla bla",
-      reponse: "Ipsum Lorem bla bla bla",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+      reponse:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+
       ticket_id: i,
       statut_id: 1,
       conseiller_id: 1,
@@ -33,9 +36,12 @@ async function createTickets() {
     });
     interventions.push({
       date: _addDays(date, day++),
-      description: "Lorem Ipsum bla bla bla",
-      reponse: "Ipsum Lorem bla bla bla",
       ticket_id: i,
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+      reponse:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+
       statut_id: 2,
       conseiller_id: 1,
       titre: "depannage 2",
@@ -43,8 +49,11 @@ async function createTickets() {
     });
     interventions.push({
       date: _addDays(date, day++),
-      description: "Lorem Ipsum bla bla bla",
-      reponse: "Ipsum Lorem bla bla bla",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+      reponse:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+
       ticket_id: i,
       statut_id: 4,
       conseiller_id: 1,
@@ -53,8 +62,11 @@ async function createTickets() {
     });
     interventions.push({
       date: _addDays(date, day++),
-      description: "Lorem Ipsum bla bla bla",
-      reponse: "Ipsum Lorem bla bla bla",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+      reponse:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eaque facere? Ab necessitatibus ducimus vel quod eaque quis excepturi natus reiciendis id nam ea nobis nostrum magni voluptatum, iste alias ratione accusantium delectus.",
+
       ticket_id: i,
       statut_id: 5,
       conseiller_id: 2,

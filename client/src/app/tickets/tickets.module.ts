@@ -6,6 +6,7 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
 import { TicketComponent } from './components/ticket/ticket.component';
 import { InterventionComponent } from './components/intervention/intervention.component';
 import { SharedModule } from '../shared/shared.module';
+import { NewInterventionFormComponent } from '../shared/components/new-intervention-form/new-intervention-form.component';
 
 @NgModule({
   declarations: [
