@@ -24,6 +24,7 @@ export interface RaisonSociale {
 export interface Client {
   id: number;
   raisonSociale: RaisonSociale;
+  nom: string;
 }
 
 export interface TypeMateriel {
@@ -36,6 +37,7 @@ export interface Marque {
 
 export interface Modele {
   modele: string;
+  url: string;
 }
 
 export interface Materiel {
@@ -43,7 +45,6 @@ export interface Materiel {
   createdAt: Date;
   updatedAt: Date;
   miseEnService: Date;
-  url: string;
   client: Client;
   typeMateriel: TypeMateriel;
   marque: Marque;

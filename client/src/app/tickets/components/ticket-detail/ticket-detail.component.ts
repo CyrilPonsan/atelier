@@ -19,16 +19,16 @@ export class TicketDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+    const ref = this.route.snapshot.paramMap.get('ref');
+    if (ref) {
       this.ticketsService
-        .httpGetTicketDetails(id!)
+        .httpGetTicketDetails(ref!)
         .subscribe({ next: this.handleResponse.bind(this) });
     }
   }
 
   urlHandler(): void {
-    window.open(this.ticket.materiel.url, '_blank');
+    window.open(this.ticket.materiel.modele.url, '_blank');
   }
 
   private handleResponse(response: Ticket): void {

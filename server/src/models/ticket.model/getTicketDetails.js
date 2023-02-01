@@ -11,8 +11,9 @@ const {
   Marque,
 } = require("../../services/sequelize");
 
-async function getTicketDetails(ticketId) {
-  return await Ticket.findByPk(ticketId, {
+async function getTicketDetails(ticketRef) {
+  return await Ticket.findOne({
+    where: { ref: ticketRef },
     include: [
       {
         model: Intervention,
@@ -45,7 +46,7 @@ async function getTicketDetails(ticketId) {
                 attributes: ["raisonSociale"],
               },
             ],
-            attributes: ["id"],
+            attributes: ["id", "nom"],
           },
           {
             model: TypeMateriel,
@@ -60,10 +61,10 @@ async function getTicketDetails(ticketId) {
           {
             model: Modele,
             as: "modele",
-            attributes: ["modele"],
+            attributes: ["modele", "url"],
           },
         ],
-        attributes: ["id", "createdAt", "updatedAt", "miseEnService", "url"],
+        attributes: ["id", "createdAt", "updatedAt", "miseEnService"],
       },
     ],
     order: [["intervention", "date", "DESC"]],

@@ -9,7 +9,7 @@ const {
 const ticketsRouter = express.Router();
 
 ticketsRouter.get("/", checkTokenValidity, httpGetTickets);
-ticketsRouter.get("/details/:id", checkTokenValidity, httpGetTicketDetails);
+ticketsRouter.get("/details/:ref", checkTokenValidity, httpGetTicketDetails);
 ticketsRouter.get("/statuts", checkTokenValidity, httpGetTicketStatutsList);
 
 module.exports = { ticketsRouter };

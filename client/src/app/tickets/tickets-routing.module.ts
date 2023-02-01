@@ -6,7 +6,7 @@ import { TicketsHomeComponent } from './components/tickets-home/tickets-home.com
 
 const routes: Routes = [
   {
-    path: 'tickets/details/:id',
+    path: 'tickets/details/:ref',
     component: TicketDetailComponent,
     canActivate: [AuthGuard],
   },

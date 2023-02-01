@@ -26,9 +26,9 @@ const types = [
 ];
 
 const modeles = [
-  { modele: "mega coffee server" },
-  { modele: "toto-book 3000" },
-  { modele: "super printer 4000" },
+  { modele: "mega coffee server", url },
+  { modele: "toto-book 3000", url },
+  { modele: "super printer 4000", url },
 ];
 
 const matos = [

@@ -1,7 +1,10 @@
 const {
   getTicketDetails,
 } = require("../../models/ticket.model/getTicketDetails");
-const { getTickets } = require("../../models/ticket.model/getTickets");
+const {
+  getTickets,
+  getTotalTickets,
+} = require("../../models/ticket.model/getTickets");
 const {
   getTicketsStatutsList,
 } = require("../../models/ticket.model/getTicketStatutsList");
@@ -15,30 +18,30 @@ const {
 
 async function httpGetTickets(req, res) {
   const userId = 1; //req.auth.userId;
-  const off = req.query.off;
-  const lmt = req.query.lmt;
+  const page = req.query.page;
+  const limit = req.query.lmt;
   console.log(req.query);
 
   if (
     !userId ||
     !regexNumber.test(userId) ||
-    !off ||
-    !regexNumber.test(off) ||
-    !lmt ||
-    !regexNumber.test(lmt)
+    !page ||
+    !regexNumber.test(page) ||
+    !limit ||
+    !regexNumber.test(limit)
   ) {
     return res.status(400).json({ message: badQuery });
   }
 
   try {
-    let tickets = await getTickets(userId);
-    const total = tickets.length;
-    tickets = _filtrageCourriers(tickets, +off, +lmt);
+    let tickets = await getTickets(getPagination(+page, +limit), +limit);
+    const total = await getTotalTickets();
+
     return res.status(200).json({
       message:
         tickets.length === 0 ? "liste vide" : "tickets récupérés avec succès",
-      total: total,
       data: tickets,
+      total: total,
     });
   } catch (err) {
     return res.status(500).json({ message: serverIssue + err });
@@ -46,14 +49,14 @@ async function httpGetTickets(req, res) {
 }
 
 async function httpGetTicketDetails(req, res) {
-  const ticketId = req.params.id;
+  const ticketRef = req.params.ref;
 
-  if (!ticketId || !regexNumber.test(ticketId)) {
+  if (!ticketRef || !regexNumber.test(ticketRef)) {
     return res.status(400).json({ message: badQuery });
   }
 
   try {
-    const ticketDetails = await getTicketDetails(ticketId);
+    const ticketDetails = await getTicketDetails(ticketRef);
 
     if (!ticketDetails) {
       return res.status(404).json({ message: noData });
@@ -61,7 +64,7 @@ async function httpGetTicketDetails(req, res) {
 
     return res.status(200).json(ticketDetails);
   } catch (error) {
-    return res.status(500).json({ message: serverIssue + error });
+    return res.status(500).json({ message: serverIssue });
   }
 }
 
@@ -73,23 +76,6 @@ async function httpGetTicketStatutsList(req, res) {
     return res.status(500).json({ message: serverIssue });
   }
 }
-
-//  filtrage des courriers, filter = true : historique, filter = false : envois en cours
-const _filtrageCourriers = (tab, offset, limit) => {
-  console.log("limit", limit);
-  let size;
-  if (tab.length < limit * (offset + 1)) {
-    size = tab.length;
-  } else {
-    size = limit * (offset + 1);
-  }
-  let tmp = [];
-  for (let i = offset * limit; i < size; i++) {
-    tmp = [...tmp, tab[i]];
-  }
-  console.log("size", tmp.length);
-  return tmp;
-};
 
 module.exports = {
   httpGetTickets,

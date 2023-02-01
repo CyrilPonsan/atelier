@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { fade } from 'src/app/shared/animations/animations';
 import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { TicketsService } from '../../services/tickets.service';
@@ -13,7 +14,8 @@ export class TicketsHomeComponent implements OnInit {
   ticketsList!: any[];
   constructor(
     public pagination: PaginationService,
-    private ticketsService: TicketsService
+    private ticketsService: TicketsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,10 @@ export class TicketsHomeComponent implements OnInit {
     this.getTickets();
   }
 
+  searchSubmitHandler(value: string): void {
+    this.router.navigate(['/tickets/details', value]);
+  }
+
   setMax(value: number): void {
     this.pagination.page = 0;
     this.pagination.max = value;
@@ -45,6 +51,8 @@ export class TicketsHomeComponent implements OnInit {
     this.ticketsList = response.data;
     this.pagination.total = response.total;
     this.pagination.setButtonsStyle(this.ticketsList.length);
+    console.log(this.ticketsList.length);
+
     this.pagination.setPagesMax(response.total);
   }
 

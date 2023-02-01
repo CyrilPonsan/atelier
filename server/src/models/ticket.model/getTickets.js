@@ -11,7 +11,7 @@ const {
   TypeMateriel,
 } = require("../../services/sequelize");
 
-async function getTickets(userId, sort, order) {
+async function getTickets(offset, limit) {
   return await Ticket.findAll({
     include: [
       {
@@ -58,7 +58,14 @@ async function getTickets(userId, sort, order) {
     ],
     group: ["intervention.ticket_id"],
     order: [["date", "DESC"]],
+    offset: offset,
+    limit: limit,
+    subQuery: false,
   });
 }
 
-module.exports = { getTickets };
+async function getTotalTickets() {
+  return await Ticket.count();
+}
+
+module.exports = { getTickets, getTotalTickets };

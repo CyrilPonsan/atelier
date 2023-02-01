@@ -16,7 +16,7 @@ export class TicketsService {
 
   httpGetTickets(): Observable<any> {
     return this.http.get<any>(
-      `${environment.baseUrl}/tickets?off=${this.pag.page}&lmt=${this.pag.max}`
+      `${environment.baseUrl}/tickets?page=${this.pag.page}&lmt=${this.pag.max}`
     );
   }
 
@@ -36,6 +36,8 @@ export class TicketsService {
       `${environment.baseUrl}/tickets/details/${ticketId}`
     );
   }
+  /*
+  httpGetTicketByRef(ticketRef: string): Observable<Ticket> {} */
 
   setStatutLabel(code: number): string {
     return this.statuts.find((statut) => statut.code === code)!.label;

@@ -6,6 +6,10 @@ function modeleModel(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      url: {
+        type: DataTypes.STRING,
+        allowNull: true, //  à confirmer
+      },
     },
     { timestamps: false }
   );

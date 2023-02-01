@@ -9,8 +9,8 @@ const {
   noAccess,
 } = require("../../utils/data");
 
-const accessTimeLife = "2h";
-const refreshTimeLife = "10h";
+const accessTimeLife = "15m";
+const refreshTimeLife = "1h";
 
 //  authentification de l'utilisateur
 async function httpLogin(req, res) {
