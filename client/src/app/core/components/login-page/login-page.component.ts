@@ -17,6 +17,7 @@ export class LoginPageComponent implements OnInit {
   isEmailValid = true;
   isPasswordValid = true;
   loader = false;
+  hasError = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +39,7 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  //  vérifie la validité de l'email qd le champs email perd le focus
   emailBlurHandler(): void {
     this.isEmailModified = true;
     this.isEmailValid = this.regex.regexMail.test(
@@ -45,6 +47,7 @@ export class LoginPageComponent implements OnInit {
     );
   }
 
+  //  vérifie la validité du password qd le champs password perd le focus
   passwordBlurHandler(): void {
     this.isPasswordModified = true;
     this.isPasswordValid = this.regex.regexPassword.test(
@@ -52,12 +55,16 @@ export class LoginPageComponent implements OnInit {
     );
   }
 
+  //  connexion
   submitLoginHandler(): void {
     console.log(this.loginForm.value.username);
 
     if (this.loginForm.valid) {
       this.authService
-        .httpLogin(this.loginForm.value.username, 'Abcd@1234')
+        .httpLogin(
+          this.loginForm.value.username.trim(),
+          this.loginForm.value.password.trim()
+        )
         .subscribe({
           next: this.handleResponse.bind(this),
           error: this.handleError.bind(this),
@@ -65,16 +72,21 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  //  gestion d'une réponse positive
   private handleResponse(response: any): void {
     if (response) {
       this.router.navigateByUrl('/tickets');
+      this.hasError = false;
     }
+    this.hasError = true;
   }
 
+  //  gestion d'une erreur d'identifiants
   private handleError(error: any): void {
     if (error instanceof HttpErrorResponse) {
       if (error.status === 400) {
         console.log('identifiants incorrects !');
+        this.hasError = true;
       }
     }
   }

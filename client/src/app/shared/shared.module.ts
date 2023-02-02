@@ -10,10 +10,12 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { BtnPagesComponent } from './components/btn-pages/btn-pages.component';
 import { SearchComponent } from './components/search/search.component';
 import { NewInterventionFormComponent } from './components/new-intervention-form/new-intervention-form.component';
+import { PwdVisibilityDirective } from './directives/pwd-visibility.directive';
 
 @NgModule({
   declarations: [
     InputIsValidDirective,
+    PwdVisibilityDirective,
     ModalComponent,
     ButtonComponent,
     PaginationComponent,
@@ -25,6 +27,7 @@ import { NewInterventionFormComponent } from './components/new-intervention-form
   exports: [
     ReactiveFormsModule,
     InputIsValidDirective,
+    PwdVisibilityDirective,
     ModalComponent,
     ButtonComponent,
     PaginationComponent,

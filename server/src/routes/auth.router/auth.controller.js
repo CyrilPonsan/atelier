@@ -14,20 +14,22 @@ const refreshTimeLife = "1h";
 
 //  authentification de l'utilisateur
 async function httpLogin(req, res) {
-  console.log(req.body);
   const { username, password } = req.body;
   if (
     !username ||
-    !regexMail.test(username) ||
     !password ||
+    !regexMail.test(username) ||
     !regexPassword.test(password)
   ) {
-    return res.status(400).json({ response: credentialsError });
+    return res.status(400).json({ credentialsError });
   }
+  const user = await login(username, password);
   try {
-    let user = await login(username, password);
-    if (!user) {
-      return res.status(400).json({ response: credentialsError });
+    if (!user.isValid) {
+      return res.status(400).json({ credentialsError });
+    }
+    if (!user.roles.includes("tech") || !user.roles.includes("admin")) {
+      return res.status(403).json({ noAccess });
     }
     return res.status(200).json({
       user,

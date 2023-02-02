@@ -1,26 +1,7 @@
-<!-- <main>
-  <form [formGroup]="loginForm" (submit)="submitLoginHandler()">
-    <div>
-      <label for="username">Email</label>
-      <input type="text" id="username" formControlName="username" (blur)="emailBlurHandler()"
-        [inputIsValid]="isEmailValid">
-      <p *ngIf="!isEmailValid">Saississez une adresse email valide</p>
-    </div>
-    <div>
-      <label for=" password">Mot de passe</label>
-      <input type="password" id="password" formControlName="password" (blur)="passwordBlurHandler()"
-        [inputIsValid]="isPasswordValid">
-      <p *ngIf="!isPasswordValid">Le mot de passe doit contenir huit caractères, une majuscule, une minuscule, un
-        chiffre et un caractère spécial</p>
-    </div>
-    <button type="submit">Connexion</button>
-  </form>
-</main> -->
-
-
 <main class="flex justify-center flex-col items-center gap-y-8 mb-8">
   <section *ngIf="!loader" class="w-64 md:w-96">
     <h2 class="flex justify-start md:text-3xl text-xl font-bold">Connexion</h2>
+    <h4 class="font-bold text-orange" *ngIf="hasError">Email ou mot de passe incorrect.</h4>
   </section>
   <section class="flex flex-col">
     <!--  <div *ngIf="loader" class="lds-dual-ring"></div> -->
@@ -34,10 +15,11 @@
       <p *ngIf="!isEmailValid">Saississez une adresse email valide</p>
       <!-- password -->
       <label for="password">Mot de Passe :</label>
-      <input
-        class="border-stone-300 border-2 w-full p-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="password" id="password" formControlName="password" (blur)="passwordBlurHandler()"
-        [inputIsValid]="isPasswordValid">
+      <div class="border-stone-300 border-2 flex pl-2 pr-4">
+        <input class="w-full p-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password"
+          id="password" formControlName="password" (blur)="passwordBlurHandler()" [inputIsValid]="isPasswordValid"
+          toggle>
+      </div>
       <p *ngIf="!isPasswordValid">Le mot de passe doit contenir huit caractères, une majuscule, une minuscule, un
         chiffre et un caractère spécial</p>
 
